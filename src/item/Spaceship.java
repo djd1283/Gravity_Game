@@ -5,6 +5,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 import projectile.Laser;
+import projectile.LongRangeCannon;
 import projectile.Missile;
 import projectile.Projectile;
 
@@ -33,8 +34,8 @@ public class Spaceship extends Item
 	public Spaceship(Universe universe)
 	{
 		super(universe);
-		influenceOfGravity = 1;
-		projectile = new Missile(universe);
+		influenceOfGravity = .5;
+		projectile = new LongRangeCannon(universe);
 	}
 	
 	@Override

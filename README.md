@@ -13,6 +13,8 @@ branch, and can merge with the master branch once the bug is fixed. The develop
 branch is used to add new features to the game. Feature branches may merge from
 this branch, but must merge back once a new feature is finished. Finally, a
 release branch may be created from the development branch to package all the
-changes of the development for final bug fixing and tweaking. Once the
+changes of the development branch for final bug fixing and tweaking. Once the
 release branch is ready for 'publishing', it can merge with the master
 branch for public use.
+
+Helpful Link for branching format here --> http://nvie.com/posts/a-successful-git-branching-model/

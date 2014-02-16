@@ -1,5 +1,8 @@
 package projectile;
 
+import toolkit.Create;
+import toolkit.Point;
+import toolkit.Vector;
 import item.Item;
 import item.Planet;
 import game.Universe;
@@ -55,12 +58,39 @@ public abstract class Projectile extends Item
 	{
 		if(item instanceof Planet)
 		{
-			if(distanceSquared < Math.pow(radius + item.radius, 2))
+			Point[] points = getLineCircleIntersection(position, velocity, item.position, item.radius);
+			if(points != null)
 			{
+				System.out.println("here");
 				universe.remove(item);
+				universe.remove(this);
 			}
 		}
 	}
 	
-	
+	/**
+	 * Calculates a line and circle intersection, and returns the two or less points
+	 * of collision between them. The two points represent the places where the line
+	 * intersects with the outline of the circle.
+	 * @param A The point that the line segment starts at.
+	 * @param B A vector leading from the first point to the second point on the line segment.
+	 * @param C A point that represents the center of the circle.
+	 * @return Two points, where the line intersects the circle first and last.
+	 */
+	public Point[] getLineCircleIntersection(Point A, Vector B, Point C, double radius)
+	{
+		double a = B.x * B.x + B.y * B.y;
+		double b = 2 * (A.x * B.x + A.y * B.y - B.x * C.x - B.y * C.y);
+		double c = A.x * A.x + C.x * C.x + A.y * A.y + C.y * C.y - radius * radius;
+		
+		double s = Math.sqrt(b * b - 4 * a * c);
+		double d1 = (-b + s) / (2 * a);
+		double d2 = (-b - s) / (2 * a);
+		if(s != Double.NaN && d1 >= 0 && d1 <= 1 && d2 >= 0 && d2 <= 1)
+		{
+			Point[] points = {A.addVector(B.multiplyBy(d1)), A.addVector(B.multiplyBy(d2))};
+			return points;
+		}
+		return null;
+	}
 }

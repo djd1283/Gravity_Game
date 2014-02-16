@@ -23,6 +23,9 @@ public class LongRangeCannon extends Projectile
 	public void paint()
 	{
 		Create.createCircle(position, radius, c1, c1);
+		float[] c2 = {0, 1, 0, 1};
+		float[] c3 = {1, 0, 1, 1};
+		Create.createLine(position, position.addVector(velocity), c2);
 	}
 
 	@Override

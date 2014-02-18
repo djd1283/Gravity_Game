@@ -44,7 +44,18 @@ public abstract class Projectile extends Item
 		
 		position = position.addVector(velocity);
 		
-		detectProximityToAllItems();
+		for(int a = 0; a < universe.size(); a++)
+		{
+			Item target = universe.get(a);
+			if(target instanceof Planet)
+			{
+				Point[] points = getLineCircleIntersection(position, velocity, target.position, target.radius);
+				if(points != null)
+				{
+					universe.remove(this);
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -56,16 +67,17 @@ public abstract class Projectile extends Item
 	@Override
 	public void handleProximityToItem(Item item, double distanceSquared)
 	{
+		/*
 		if(item instanceof Planet)
 		{
-			Point[] points = getLineCircleIntersection(position, velocity, item.position, item.radius);
+			points = getLineCircleIntersection(position, velocity, item.position, item.radius);
 			if(points != null)
 			{
-				System.out.println("here");
 				universe.remove(item);
 				universe.remove(this);
 			}
 		}
+		*/
 	}
 	
 	/**

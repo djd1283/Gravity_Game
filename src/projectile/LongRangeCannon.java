@@ -15,7 +15,7 @@ public class LongRangeCannon extends Projectile
 		this.inaccuracy = 0;
 		this.radius = .8;
 		this.speed = 8;
-		this.reload = 20;
+		this.reload = 2;
 		this.influenceOfGravity = 8;
 	}
 

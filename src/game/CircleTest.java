@@ -36,8 +36,8 @@ public class CircleTest implements Plugin
 	{
 		setupView();
 		Point origin = new Point(0, 0);
-		Point lineSegStart = new Point(-20, 0);
-		Vector toLineSegEnd = new Vector(40, 5);
+		Point lineSegStart = new Point(20, 0);
+		Vector toLineSegEnd = new Vector(-40, 5);
 		Point[] points = getLineCircleIntersection(lineSegStart, toLineSegEnd, origin, 10);
 		float[] c1 = {0, 0, 1, 1};
 		float[] c2 = {1, 0, 0, 1};
@@ -80,6 +80,8 @@ public class CircleTest implements Plugin
 		if(s != Double.NaN && d1 >= 0 && d1 <= 1 && d2 >= 0 && d2 <= 1)
 		{
 			Point[] points = {A.addVector(B.multiplyBy(d1)), A.addVector(B.multiplyBy(d2))};
+			System.out.println("d1:" + d1);
+			System.out.println("d2:" + d2);
 			return points;
 		}
 		return null;

@@ -1,12 +1,7 @@
 package item;
 
 import game.Universe;
-
-import java.util.List;
-
 import toolkit.Create;
-import toolkit.Point;
-import toolkit.Vector;
 
 /**
  * Extends Item to represent a sun in the observable universe. A Sun instance is currently

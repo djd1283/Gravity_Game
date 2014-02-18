@@ -1,9 +1,8 @@
 package item;
 
-import java.util.List;
-
 import game.Universe;
-import toolkit.*;
+import toolkit.Point;
+import toolkit.Vector;
 
 /**
  * An abstract class used to represent any ambiguous object in the universe. Contains a reference

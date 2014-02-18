@@ -1,10 +1,7 @@
 package item;
 
-import java.util.List;
-
-import toolkit.Create;
-import toolkit.Vector;
 import game.Universe;
+import toolkit.Create;
 
 /**
  * Extends the item class, representing actual planets in the observable universe.

@@ -1,7 +1,5 @@
 package toolkit;
 
-import java.util.Random;
-
 import org.lwjgl.opengl.GL11;
 
 /**

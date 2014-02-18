@@ -1,8 +1,5 @@
 package gameengine;
 
-import java.awt.Dimension;
-
-import org.lwjgl.opengl.Drawable;
 
 /**
  * Used as an interface by the GameEngine to give an instance graphics, audio, and input capabilities

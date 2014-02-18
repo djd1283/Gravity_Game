@@ -1,8 +1,8 @@
 package projectile;
 
-import toolkit.Create;
-import item.Item;
 import game.Universe;
+import item.Item;
+import toolkit.Create;
 
 /**
  * Extends Projectile to represent a mid-ranged space weapon. Currently intended

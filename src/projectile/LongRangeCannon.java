@@ -1,8 +1,8 @@
 package projectile;
 
-import toolkit.Create;
-import item.Item;
 import game.Universe;
+import item.Item;
+import toolkit.Create;
 
 public class LongRangeCannon extends Projectile
 {
@@ -15,7 +15,7 @@ public class LongRangeCannon extends Projectile
 		this.inaccuracy = 0;
 		this.radius = .8;
 		this.speed = 8;
-		this.reload = 2;
+		this.reload = 20;
 		this.influenceOfGravity = 8;
 	}
 
@@ -23,9 +23,6 @@ public class LongRangeCannon extends Projectile
 	public void paint()
 	{
 		Create.createCircle(position, radius, c1, c1);
-		float[] c2 = {0, 1, 0, 1};
-		float[] c3 = {1, 0, 1, 1};
-		Create.createLine(position, position.addVector(velocity), c2);
 	}
 
 	@Override

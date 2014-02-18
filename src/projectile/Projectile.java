@@ -1,11 +1,10 @@
 package projectile;
 
-import toolkit.Create;
-import toolkit.Point;
-import toolkit.Vector;
+import game.Universe;
 import item.Item;
 import item.Planet;
-import game.Universe;
+import toolkit.Point;
+import toolkit.Vector;
 
 /**
  * Used to represent a weapon that can be used by intelligent Items
@@ -42,8 +41,6 @@ public abstract class Projectile extends Item
 			universe.remove(this);
 		}
 		
-		position = position.addVector(velocity);
-		
 		for(int a = 0; a < universe.size(); a++)
 		{
 			Item target = universe.get(a);
@@ -53,9 +50,12 @@ public abstract class Projectile extends Item
 				if(points != null)
 				{
 					universe.remove(this);
+					universe.remove(target);
 				}
 			}
 		}
+		
+		position = position.addVector(velocity);
 	}
 	
 	@Override
@@ -67,17 +67,7 @@ public abstract class Projectile extends Item
 	@Override
 	public void handleProximityToItem(Item item, double distanceSquared)
 	{
-		/*
-		if(item instanceof Planet)
-		{
-			points = getLineCircleIntersection(position, velocity, item.position, item.radius);
-			if(points != null)
-			{
-				universe.remove(item);
-				universe.remove(this);
-			}
-		}
-		*/
+		
 	}
 	
 	/**
@@ -87,18 +77,24 @@ public abstract class Projectile extends Item
 	 * @param A The point that the line segment starts at.
 	 * @param B A vector leading from the first point to the second point on the line segment.
 	 * @param C A point that represents the center of the circle.
+	 * @param r The radius of the circle.
 	 * @return Two points, where the line intersects the circle first and last.
 	 */
-	public Point[] getLineCircleIntersection(Point A, Vector B, Point C, double radius)
+	public Point[] getLineCircleIntersection(Point A, Vector B, Point C, double r)
 	{
 		double a = B.x * B.x + B.y * B.y;
 		double b = 2 * (A.x * B.x + A.y * B.y - B.x * C.x - B.y * C.y);
-		double c = A.x * A.x + C.x * C.x + A.y * A.y + C.y * C.y - radius * radius;
+		double c = A.x * A.x - 2 * A.x * C.x + C.x * C.x + A.y * A.y - 2 * A.y * C.y + C.y * C.y - r * r;
 		
 		double s = Math.sqrt(b * b - 4 * a * c);
 		double d1 = (-b + s) / (2 * a);
 		double d2 = (-b - s) / (2 * a);
 		if(s != Double.NaN && d1 >= 0 && d1 <= 1 && d2 >= 0 && d2 <= 1)
+		{
+			Point[] points = {A.addVector(B.multiplyBy(d1)), A.addVector(B.multiplyBy(d2))};
+			return points;
+		}
+		if(d1 < 0 && d2 > 0 || d1 > 0 && d2 < 0)
 		{
 			Point[] points = {A.addVector(B.multiplyBy(d1)), A.addVector(B.multiplyBy(d2))};
 			return points;

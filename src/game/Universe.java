@@ -1,19 +1,16 @@
 package game;
 
+import item.Item;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
 
 import toolkit.Create;
 import toolkit.Point;
 import toolkit.Vector;
-
-import item.Item;
 
 
 /**

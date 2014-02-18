@@ -1,13 +1,8 @@
 package projectile;
 
-import item.Item;
-
-import java.util.List;
-
-
-import toolkit.Create;
-
 import game.Universe;
+import item.Item;
+import toolkit.Create;
 
 /**
  * Extends Projectile to represent a short-ranged space weapon. It

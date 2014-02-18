@@ -1,9 +1,9 @@
 package item;
 
+import game.Universe;
 import toolkit.Create;
 import toolkit.Point;
 import toolkit.Vector;
-import game.Universe;
 
 /**
  * Used to create an aparent boundary to the Universe. Paints a black,

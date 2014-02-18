@@ -1,21 +1,17 @@
 package game;
 
-import java.awt.Dimension;
-import java.util.Random;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.Drawable;
-import org.lwjgl.opengl.GL11;
-
 import gameengine.GameEngine;
 import gameengine.Plugin;
 import item.Planet;
 import item.RadialBoundary;
 import item.Spaceship;
 import item.Sun;
-import toolkit.Create;
+
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
+
 import toolkit.Point;
 import toolkit.Vector;
 

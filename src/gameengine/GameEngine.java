@@ -31,7 +31,6 @@ public class GameEngine
 	 */
 	public void setupDisplay() throws LWJGLException
 	{
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		setupDisplayMode();
 		Display.setFullscreen(true);
 		Display.setVSyncEnabled(true);

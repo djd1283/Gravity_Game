@@ -1,19 +1,16 @@
 package item;
 
+import game.Universe;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
-import projectile.Laser;
 import projectile.LongRangeCannon;
-import projectile.Missile;
 import projectile.Projectile;
-
 import toolkit.Create;
 import toolkit.Point;
 import toolkit.Vector;
-
-import game.Universe;
 
 /**
  * Extends Item to represent a player-controlled(for now) spaceship. Currently, the spaceship
@@ -116,6 +113,10 @@ public class Spaceship extends Item
 		if(Keyboard.isKeyDown(Keyboard.KEY_W))
 		{
 			currentAcceleration = acceleration;
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_S))
+		{
+			currentAcceleration = -acceleration;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_A))
 		{

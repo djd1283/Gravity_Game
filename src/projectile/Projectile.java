@@ -46,11 +46,11 @@ public abstract class Projectile extends Item
 			Item target = universe.getBody(a);
 			if(target instanceof Planet)
 			{
-				Point[] points = getLineCircleIntersection(position, velocity, target.position, target.radius);
+				Point[] points = getLineCircleIntersection(position, velocity, target.position, target.radius + radius);
 				if(points != null)
 				{
-					universe.removeProj(this);
 					universe.removeBody(target);
+					universe.removeProj(this);
 				}
 			}
 		}

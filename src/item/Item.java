@@ -33,7 +33,6 @@ public abstract class Item
 	public abstract void update();
 	public abstract void paint();
 	public abstract void updateUponDeath();
-	public abstract void handleProximityToItem(Item item, double distanceSquared);
 	public abstract Item copy();
 
 	/**
@@ -65,24 +64,5 @@ public abstract class Item
 			}
 		}
 	}
-	/**
-	 * This method loops through all items in the universe and invokes 'handleProximityToItem' for all of them.
-	 * The item and its distance to this object squared are both provided as arguments.
-	 */
-	public void detectProximityToAllItems()
-	{
-		
-		for(int a = 0; a < universe.size(); a++)
-		{
-			Item item = universe.get(a);
-			if(item != this)
-			{
-				double distanceX = position.x - item.position.x;
-				double distanceY = position.y - item.position.y;
-				double distanceSquared = distanceX * distanceX + distanceY * distanceY;
-				
-				handleProximityToItem(item, distanceSquared);
-			}
-		}
-	}
+
 }

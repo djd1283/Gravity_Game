@@ -33,22 +33,11 @@ public class Planet extends Item
 	public void update()
 	{
 		position = position.addVector(velocity);
-
-		for (int a = 0; a < universe.size(); a++)
-		{
-			applyGravitationalForceToItem(universe.get(a), 0, 0);
-		}
 	}
 	@Override
 	public void paint()
 	{
 		Create.createCircle(position, radius, c1, c1);
-	}
-	@Override
-	public void handleProximityToItem(Item item, double distanceSquared)
-	{
-		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void updateUponDeath()

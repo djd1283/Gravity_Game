@@ -55,27 +55,27 @@ public class Game implements Plugin
 		
 		RadialBoundary boundary = new RadialBoundary(universe);
 		boundary.radius = 200;
-		universe.add(boundary);
+		universe.addArea(boundary);
 		
 		Sun sun1 = new Sun(universe);	
 		sun1.position = new Point(0, 0);
-		universe.add(sun1);
+		universe.addBody(sun1);
 		
 		Sun sun2 = new Sun(universe);	
 		sun2.position = new Point(0, 50);
-		universe.add(sun2);
+		universe.addBody(sun2);
 		
 		for(int a = 0; a < 10; a++)
 		{
 			Planet planet = new Planet(universe);
 			planet.position = new Point(universe.randGen.nextDouble() * 200 - 100, universe.randGen.nextDouble() * 200 - 100);
 			planet.velocity = new Vector(universe.randGen.nextDouble() * 5 - 2.5, universe.randGen.nextDouble() * 5 - 2.5);
-			universe.add(planet);
+			universe.addBody(planet);
 		}
 		
 		Spaceship spaceship = new Spaceship(universe);
 		spaceship.position = new Point(-50, 0);
-		universe.add(spaceship);
+		universe.addShip(spaceship);
 	}	
 	@Override
 	public boolean runPlugin()
@@ -115,7 +115,7 @@ public class Game implements Plugin
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		//setup up coordinate system, translated by center of focus, scaled height to width of 200
-		GL11.glOrtho(-universe.zoom + universe.cof.x, universe.zoom + universe.cof.x, -universe.zoom * heightWidthRatio + universe.cof.y, universe.zoom * heightWidthRatio + universe.cof.y, 1, -1);
+		GL11.glOrtho(-universe.zoom + universe.centerOfFocus.x, universe.zoom + universe.centerOfFocus.x, -universe.zoom * heightWidthRatio + universe.centerOfFocus.y, universe.zoom * heightWidthRatio + universe.centerOfFocus.y, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
 

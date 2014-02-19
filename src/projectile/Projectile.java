@@ -38,19 +38,19 @@ public abstract class Projectile extends Item
 		deathCounter--;
 		if(deathCounter <= 0)
 		{
-			universe.remove(this);
+			universe.removeProj(this);
 		}
 		
-		for(int a = 0; a < universe.size(); a++)
+		for(int a = 0; a < universe.getBodyListSize(); a++)
 		{
-			Item target = universe.get(a);
+			Item target = universe.getBody(a);
 			if(target instanceof Planet)
 			{
 				Point[] points = getLineCircleIntersection(position, velocity, target.position, target.radius);
 				if(points != null)
 				{
-					universe.remove(this);
-					universe.remove(target);
+					universe.removeProj(this);
+					universe.removeBody(target);
 				}
 			}
 		}
@@ -63,13 +63,7 @@ public abstract class Projectile extends Item
 	
 	@Override
 	public abstract void updateUponDeath();
-	
-	@Override
-	public void handleProximityToItem(Item item, double distanceSquared)
-	{
-		
-	}
-	
+
 	/**
 	 * Calculates a line and circle intersection, and returns the two or less points
 	 * of collision between them. The two points represent the places where the line

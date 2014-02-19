@@ -52,7 +52,7 @@ public class Spaceship extends Item
 		}
 		position = position.addVector(velocity);
 		
-		universe.cof = position;
+		universe.centerOfFocus = position;
 	}
 	@Override
 	public void paint()
@@ -69,12 +69,6 @@ public class Spaceship extends Item
 		Point p3 = position.addVector(new Vector(x3, y3));
 		
 		Create.createTri(p1, p2, p3, color, color, color);
-	}
-	@Override
-	public void handleProximityToItem(Item item, double distanceSquared)
-	{
-		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void updateUponDeath()
@@ -190,7 +184,7 @@ public class Spaceship extends Item
 			//find cursor y position by shifting and scaling absolute position
 			double cursorY = (Mouse.getY() - height / 2) / (width / 2) * universe.zoom;
 			//construct final cursor Point instance from x and y values, convert from screen to universe coordinates
-			Point cursorPoint = new Point(cursorX, cursorY).addVector(universe.cof.toVector());
+			Point cursorPoint = new Point(cursorX, cursorY).addVector(universe.centerOfFocus.toVector());
 			//create vector from spaceship's current position to mouse position
 			Vector toCursorPoint = position.vectorTo(cursorPoint);
 			
@@ -210,7 +204,7 @@ public class Spaceship extends Item
 			//place projectile at spaceship's position
 			projectileFired.position = position.copy();
 			//apply final gravitational vector to planets velocity, as acceleration = change in velocity
-			universe.add(projectileFired);
+			universe.addProj(projectileFired);
 		}
 	}
 }

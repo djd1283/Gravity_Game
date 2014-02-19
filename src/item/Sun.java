@@ -33,22 +33,64 @@ public class Sun extends Item
 	public void update()
 	{
 		position = position.addVector(velocity);
-
-		for (int a = 0; a < universe.size(); a++)
-		{
-			applyGravitationalForceToItem(universe.get(a), .1, .5);
-		}
-		
-		detectProximityToAllItems();
+		applyGravitationalForceToAllItems();
+		updateUponAllCollisions();
 	}
-	@Override
-	public void handleProximityToItem(Item item, double distanceSquared)
+	
+	private void updateUponAllCollisions()
 	{
-		if(distanceSquared < Math.pow(radius + item.radius, 2) && !(item instanceof RadialBoundary))
+		for(int a = 0; a < universe.getBodyListSize(); a++)
 		{
-			universe.remove(item);
+			Item currentBody = universe.getBody(a);
+			if(!(currentBody instanceof Sun))
+			{
+				updateUponCollision(currentBody);
+			}
+		}
+		for(int a = 0; a < universe.getShipListSize(); a++)
+		{
+			updateUponCollision(universe.getShip(a));
+		}
+		for(int a = 0; a < universe.getProjListSize(); a++)
+		{
+			updateUponCollision(universe.getProj(a));
 		}
 	}
+	
+	private void applyGravitationalForceToAllItems()
+	{
+		for (int a = 0; a < universe.getBodyListSize(); a++)
+		{
+			Item currentBody = universe.getBody(a);
+			if(!(currentBody instanceof Sun))
+			{
+				applyGravitationalForceToItem(currentBody, .1, .5);
+			}
+		}
+		for (int a = 0; a < universe.getShipListSize(); a++)
+		{
+			applyGravitationalForceToItem(universe.getShip(a), .1, .5);
+		}
+		for (int a = 0; a < universe.getProjListSize(); a++)
+		{
+			applyGravitationalForceToItem(universe.getProj(a), .1, .5);
+		}
+	}
+	
+	public void updateUponCollision(Item item)
+	{
+		double distanceX = item.position.x - position.x;
+		double distanceY = item.position.y - position.y;
+		if(distanceX < radius + item.radius && distanceY < radius + item.radius)
+		{
+			double distanceSquared = distanceX * distanceX + distanceY * distanceY;
+			if(distanceSquared < Math.pow(radius + item.radius, 2) && !(item instanceof RadialBoundary))
+			{
+				universe.remove(item);
+			}
+		}
+	}
+	
 	@Override
 	public void updateUponDeath()
 	{

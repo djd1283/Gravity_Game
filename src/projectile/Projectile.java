@@ -49,18 +49,17 @@ public abstract class Projectile extends Item
 				Point[] points = getLineCircleIntersection(position, velocity, target.position, target.radius + radius);
 				if(points != null)
 				{
-					universe.removeBody(target);
-					universe.removeProj(this);
+					updateUponCollision(target);
 				}
 			}
 		}
-		
+		updateProjectile();
 		position = position.addVector(velocity);
 	}
-	
+	public abstract void updateUponCollision(Item item);
+	public abstract void updateProjectile();
 	@Override
 	public abstract void paint();
-	
 	@Override
 	public abstract void updateUponDeath();
 

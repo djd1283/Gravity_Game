@@ -47,5 +47,23 @@ public class Laser extends Projectile
 		laser.deathCounter = deathCounter;
 		return laser;
 	}
+
+
+	
+	@Override
+	public void updateUponCollision(Item item)
+	{
+		universe.remove(item);
+		universe.remove(this);
+	}
+
+
+	@Override
+	public void updateProjectile()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 }

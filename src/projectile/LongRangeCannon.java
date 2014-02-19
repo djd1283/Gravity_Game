@@ -46,4 +46,19 @@ public class LongRangeCannon extends Projectile
 		return longRangeCannon;
 	}
 
+
+	@Override
+	public void updateUponCollision(Item item)
+	{
+		universe.remove(item);
+		universe.remove(this);
+	}
+
+	@Override
+	public void updateProjectile()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

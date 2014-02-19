@@ -51,4 +51,25 @@ public class Missile extends Projectile
 		return missile;
 	}
 
+	@Override
+	public void updateUponCollision(Item item)
+	{
+		universe.remove(item);
+		universe.remove(this);
+	}
+
+	@Override
+	public void updateProjectile()
+	{
+		//find nearest planet and home in on it.
+		for(int a = 0; a < universe.getBodyListSize(); a++)
+		{
+			Item currentBody = universe.getBody(a);
+			if(!(currentBody instanceof Sun))
+			{
+				
+			}
+		}
+	}
+
 }

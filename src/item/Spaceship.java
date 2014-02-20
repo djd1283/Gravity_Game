@@ -7,6 +7,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 import projectile.LongRangeCannon;
+import projectile.Missile;
 import projectile.Projectile;
 import toolkit.Create;
 import toolkit.Point;
@@ -32,7 +33,7 @@ public class Spaceship extends Item
 	{
 		super(universe);
 		influenceOfGravity = .5;
-		projectile = new LongRangeCannon(universe);
+		projectile = new Missile(universe);
 	}
 	
 	@Override
@@ -132,34 +133,6 @@ public class Spaceship extends Item
 		Vector accelerationVector = new Vector(x, y);
 		//apply acceleration
 		velocity = velocity.addVector(accelerationVector);
-	}
-	
-	/**
-	 * Currently unused, but functional. Corrects the parameter angle 'angle.
-	 * If the angle is below 0 radians or above 2 * pi radians, this method
-	 * will scale it back down into the 0 < angle < 2 * pi range.
-	 * @param angle
-	 * @return
-	 */
-	@SuppressWarnings("unused")
-	private double correctAngle(double angle)
-	{
-		while(true)
-		{
-			if(angle >= 2 * Math.PI)
-			{
-				angle -= 2 * Math.PI;
-			}
-			else if(angle < 0)
-			{
-				angle += 2 * Math.PI;
-			}
-			else
-			{
-				break;
-			}
-		}
-		return angle;
 	}
 
 	/**

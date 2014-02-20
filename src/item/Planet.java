@@ -27,6 +27,7 @@ public class Planet extends Item
 		c2[2] = universe.randGen.nextFloat();
 		c2[3] = universe.randGen.nextFloat();
 		radius = 2;
+		influenceOfGravity = 1;
 	}
 
 	@Override

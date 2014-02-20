@@ -35,34 +35,25 @@ public abstract class Item
 	public abstract void updateUponDeath();
 	public abstract Item copy();
 
-	/**
-	 * Applies a gravitational force of strength 'strengthOfGravity' to the item.
-	 * The gravitational force is scaled inversely by the distance between this Item and the
-	 * target Item, and is taken to the power of 'distanceFactorOfGravity' for relevance
-	 * purposes.
-	 * @param item The Item that the gravitational vector will be applied to.
-	 */
-	public void applyGravitationalForceToItem(Item item, double strengthOfGravity, double distanceFactorOfGravity)
+	public Vector getVelocityToOrbitItem(GravitationalItem item)
 	{
-		//quick check to see if target item is affected by gravity
-		if(item.influenceOfGravity != 0)
-		{
-			//gravity cannot be applied on an item by itself
-			if(item != this)
-			{
-				// get vector from planet to sun
-				Vector vectorFromPlanetToSun = item.position.vectorTo(position);
-				// get magnitude representing distance from planet to sun
-				double distanceFromPlanetToSun = vectorFromPlanetToSun.magnitude();
-				// a = G / d^2 used to find magnitude of gravitational acceleration
-				double gravitationalAcceleration = strengthOfGravity * item.influenceOfGravity / Math.pow(distanceFromPlanetToSun, distanceFactorOfGravity);
-				// scale vector from planet to sun to gravitational vector, to change magnitude but not direction
-				Vector gravitationalVector = vectorFromPlanetToSun.multiplyBy(gravitationalAcceleration / distanceFromPlanetToSun);
-				// apply final gravitational vector to planets velocity, as acceleration = change in velocity
-				item.velocity = item.velocity.addVector(gravitationalVector);
-				// only 1 square root used in process
-			}
-		}
+		//get a vector from this position to the item's position
+		Vector toGravitationalItem = position.vectorTo(item.position);
+		//find the distance between this item and that item
+		double distanceToGravitationalItem = toGravitationalItem.magnitude();
+		//find the acceleration from this item to the gravitational item
+		double acceleration = item.strengthOfGravity * influenceOfGravity / Math.pow(distanceToGravitationalItem, item.distanceFactorOfGravity);
+		//find the orbit velocity with previous values
+		double orbitVelocity = Math.sqrt(acceleration * distanceToGravitationalItem);
+		//find the angle to the item
+		double angleToGravitationalItem = toGravitationalItem.angle();
+		//find the angle perpendicular to the item
+		double angleOfOrbitVelocity = angleToGravitationalItem + Math.PI / 2;
+		//get x and y coordinates of orbit velocity
+		double x = orbitVelocity * Math.cos(angleOfOrbitVelocity);
+		double y = orbitVelocity * Math.sin(angleOfOrbitVelocity);
+		//create and return the orbital velocity vector
+		return new Vector(x, y);
+		//1 sqrt, 3 trigs used
 	}
-
 }

@@ -58,10 +58,6 @@ public abstract class Projectile extends Item
 	}
 	public abstract void updateUponCollision(Item item);
 	public abstract void updateProjectile();
-	@Override
-	public abstract void paint();
-	@Override
-	public abstract void updateUponDeath();
 
 	/**
 	 * Calculates a line and circle intersection, and returns the two or less points

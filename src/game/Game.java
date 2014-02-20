@@ -54,27 +54,37 @@ public class Game implements Plugin
 		universe = new Universe();
 		
 		RadialBoundary boundary = new RadialBoundary(universe);
-		boundary.radius = 200;
+		boundary.radius = 1000;
 		universe.addArea(boundary);
-		
-		Sun sun1 = new Sun(universe);	
-		sun1.position = new Point(0, 0);
-		universe.addBody(sun1);
-		
-		Sun sun2 = new Sun(universe);	
-		sun2.position = new Point(0, 50);
-		universe.addBody(sun2);
-		
 		for(int a = 0; a < 10; a++)
 		{
-			Planet planet = new Planet(universe);
-			planet.position = new Point(universe.randGen.nextDouble() * 200 - 100, universe.randGen.nextDouble() * 200 - 100);
-			planet.velocity = new Vector(universe.randGen.nextDouble() * 5 - 2.5, universe.randGen.nextDouble() * 5 - 2.5);
-			universe.addBody(planet);
+			Sun sun = new Sun(universe);
+			
+			double sx = universe.randGen.nextDouble() * 1200 - 600;
+			double sy = universe.randGen.nextDouble() * 1200 - 600;
+			sun.position = new Point(sx, sy);
+			universe.addBody(sun);
+			//loop through 10 planets to be created
+			for(int b = 0; b < 10; b++)
+			{
+				//create planet
+				Planet planet = new Planet(universe);
+				//set the planet's radius between 0 and 4
+				planet.radius = universe.randGen.nextDouble() * 4;
+				//generate the planet's location to a random location in the universe
+				double angle = universe.randGen.nextDouble() * 2 * Math.PI;
+				double x = sx + universe.randGen.nextDouble() * (200 - planet.radius) * Math.cos(angle);
+				double y = sy + universe.randGen.nextDouble() * (200 - planet.radius) * Math.sin(angle);
+				//save the generated location
+				planet.position = new Point(x, y);
+				//set the planets velocity to that needed to orbit the sun
+				planet.velocity = planet.getVelocityToOrbitItem(sun);
+				//add the planet to the universe
+				universe.addBody(planet);
+			}
 		}
-		
 		Spaceship spaceship = new Spaceship(universe);
-		spaceship.position = new Point(-50, 0);
+		spaceship.position = new Point(-100, 0);
 		universe.addShip(spaceship);
 	}	
 	@Override

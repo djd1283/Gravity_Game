@@ -1,5 +1,7 @@
 package toolkit;
 
+import game.Universe;
+
 import org.lwjgl.opengl.GL11;
 
 /**

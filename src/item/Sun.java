@@ -9,7 +9,7 @@ import toolkit.Create;
  * nearby objects.
  * @author David
  */
-public class Sun extends Item
+public class Sun extends GravitationalItem
 {
 	private float[] c1 = new float[4];
 
@@ -22,6 +22,8 @@ public class Sun extends Item
 		c1[3] = 1;
 		radius = 5;
 		influenceOfGravity = 0;
+		strengthOfGravity = .1;
+		distanceFactorOfGravity = 1;
 	}
 
 	@Override
@@ -29,73 +31,17 @@ public class Sun extends Item
 	{
 		Create.createCircle(position, radius, c1, c1);
 	}
-	@Override
-	public void update()
-	{
-		position = position.addVector(velocity);
-		applyGravitationalForceToAllItems();
-		updateUponAllCollisions();
-	}
-	
-	private void updateUponAllCollisions()
-	{
-		for(int a = 0; a < universe.getBodyListSize(); a++)
-		{
-			Item currentBody = universe.getBody(a);
-			if(!(currentBody instanceof Sun))
-			{
-				updateUponCollision(currentBody);
-			}
-		}
-		for(int a = 0; a < universe.getShipListSize(); a++)
-		{
-			updateUponCollision(universe.getShip(a));
-		}
-		for(int a = 0; a < universe.getProjListSize(); a++)
-		{
-			updateUponCollision(universe.getProj(a));
-		}
-	}
-	
-	private void applyGravitationalForceToAllItems()
-	{
-		for (int a = 0; a < universe.getBodyListSize(); a++)
-		{
-			Item currentBody = universe.getBody(a);
-			if(!(currentBody instanceof Sun))
-			{
-				applyGravitationalForceToItem(currentBody, .1, .5);
-			}
-		}
-		for (int a = 0; a < universe.getShipListSize(); a++)
-		{
-			applyGravitationalForceToItem(universe.getShip(a), .1, .5);
-		}
-		for (int a = 0; a < universe.getProjListSize(); a++)
-		{
-			applyGravitationalForceToItem(universe.getProj(a), .1, .5);
-		}
-	}
-	
-	public void updateUponCollision(Item item)
-	{
-		double distanceX = item.position.x - position.x;
-		double distanceY = item.position.y - position.y;
-		if(distanceX < radius + item.radius && distanceY < radius + item.radius)
-		{
-			double distanceSquared = distanceX * distanceX + distanceY * distanceY;
-			if(distanceSquared < Math.pow(radius + item.radius, 2) && !(item instanceof RadialBoundary))
-			{
-				universe.remove(item);
-			}
-		}
-	}
 	
 	@Override
 	public void updateUponDeath()
 	{
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public void updateUponCollision(Item item)
+	{
+		universe.remove(item);
 	}
 	@Override
 	public Item copy()
@@ -108,5 +54,13 @@ public class Sun extends Item
 		sun.influenceOfGravity = influenceOfGravity;
 		return sun;
 	}
+
+	@Override
+	public void updateGravitationalItem()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

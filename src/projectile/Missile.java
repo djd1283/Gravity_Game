@@ -23,8 +23,8 @@ public class Missile extends Projectile
 		super(universe);
 		speed = 5;
 		deathCounter = 100;
-		influenceOfGravity = 1;
-		reload = 10;
+		influenceOfGravity = 5;
+		reload = 5;
 		radius = .5;
 		inaccuracy = 0;
 	}

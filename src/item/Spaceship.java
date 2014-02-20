@@ -32,7 +32,7 @@ public class Spaceship extends Item
 	public Spaceship(Universe universe)
 	{
 		super(universe);
-		influenceOfGravity = .5;
+		influenceOfGravity = 1;
 		projectile = new Missile(universe);
 	}
 	

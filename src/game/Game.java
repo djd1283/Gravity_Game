@@ -2,6 +2,7 @@ package game;
 
 import gameengine.GameEngine;
 import gameengine.Plugin;
+import item.Item;
 import item.Planet;
 import item.RadialBoundary;
 import item.Spaceship;
@@ -54,33 +55,64 @@ public class Game implements Plugin
 		universe = new Universe();
 		
 		RadialBoundary boundary = new RadialBoundary(universe);
-		boundary.radius = 1000;
+		boundary.radius = 4000;
 		universe.addArea(boundary);
-		for(int a = 0; a < 10; a++)
+		
+		for(int a = 0; a < 60; a++)
 		{
 			Sun sun = new Sun(universe);
 			
-			double sx = universe.randGen.nextDouble() * 1200 - 600;
-			double sy = universe.randGen.nextDouble() * 1200 - 600;
+			double sx = universe.randGen.nextDouble() * 4000 - 2000;
+			double sy = universe.randGen.nextDouble() * 4000 - 2000;
+			
 			sun.position = new Point(sx, sy);
-			universe.addBody(sun);
-			//loop through 10 planets to be created
-			for(int b = 0; b < 10; b++)
+			sun.radius = 10;
+			
+			int minDistance = 200;
+			boolean canPlaceHere = true;
+			
+			for(int c = 0; c < universe.getBodyListSize(); c++)
 			{
-				//create planet
-				Planet planet = new Planet(universe);
-				//set the planet's radius between 0 and 4
-				planet.radius = universe.randGen.nextDouble() * 4;
-				//generate the planet's location to a random location in the universe
-				double angle = universe.randGen.nextDouble() * 2 * Math.PI;
-				double x = sx + universe.randGen.nextDouble() * (200 - planet.radius) * Math.cos(angle);
-				double y = sy + universe.randGen.nextDouble() * (200 - planet.radius) * Math.sin(angle);
-				//save the generated location
-				planet.position = new Point(x, y);
-				//set the planets velocity to that needed to orbit the sun
-				planet.velocity = planet.getVelocityToOrbitItem(sun);
-				//add the planet to the universe
-				universe.addBody(planet);
+				Item item = universe.getBody(c);
+				if(item instanceof Sun)
+				{
+					Vector toSun = sun.position.vectorTo(item.position);
+					
+					double distance = toSun.magnitude();
+					
+					if(distance < minDistance)
+					{
+						canPlaceHere = false;
+						break;
+					}
+				}
+			}
+			
+			if(canPlaceHere)
+			{
+				universe.addBody(sun);
+				//loop through 10 planets to be created
+				for(int b = 0; b < 10; b++)
+				{
+					//create planet
+					Planet planet = new Planet(universe);
+					//set the planet's radius between 0 and 4
+					planet.radius = 1 + universe.randGen.nextDouble() * 5;
+					//generate the planet's location to a random location in the universe
+					double angle = universe.randGen.nextDouble() * 2 * Math.PI;
+					double x = sx + (universe.randGen.nextDouble() * 50 + 50) * Math.cos(angle);
+					double y = sy + (universe.randGen.nextDouble() * 50 + 50) * Math.sin(angle);
+					//save the generated location
+					planet.position = new Point(x, y);
+					//set the planets velocity to that needed to orbit the sun
+					planet.velocity = planet.getVelocityToOrbitItem(sun);
+					//add the planet to the universe
+					universe.addBody(planet);
+				}
+			}
+			else
+			{
+				a--;
 			}
 		}
 		Spaceship spaceship = new Spaceship(universe);

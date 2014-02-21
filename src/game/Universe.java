@@ -34,7 +34,7 @@ public class Universe
 	public Universe()
 	{
 		centerOfFocus = new Point(0, 0);
-		zoom = 200;
+		zoom = 400;
 		randGen = new Random();
 	}
 	

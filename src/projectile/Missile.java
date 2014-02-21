@@ -21,11 +21,11 @@ public class Missile extends Projectile
 	public Missile(Universe universe)
 	{
 		super(universe);
-		speed = 5;
-		deathCounter = 100;
-		influenceOfGravity = 5;
+		speed = 10;
+		deathCounter = 1000;
+		influenceOfGravity = 50;
 		reload = 5;
-		radius = .5;
+		radius = 2;
 		inaccuracy = 0;
 	}
 
@@ -86,7 +86,7 @@ public class Missile extends Projectile
 					//set the new closest distance to the one found above
 					minDistance = distance;
 					//set the new closest celestial body to the current one
-					targetItem  = currentBody;
+					targetItem  = null;
 				}
 			}
 		}

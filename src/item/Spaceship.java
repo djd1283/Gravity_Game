@@ -121,6 +121,18 @@ public class Spaceship extends Item
 		{
 			angle -= .2;
 		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_1))
+		{
+			universe.zoom += Math.pow(universe.zoom, 1.5) / 1000 + 1;
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_2))
+		{
+			universe.zoom -= Math.pow(universe.zoom, 1.5) / 1000 + 1;
+			if(universe.zoom < 0)
+			{
+				universe.zoom = 0;
+			}
+		}
 		if(Mouse.isButtonDown(0))
 		{
 			fireProjectile();

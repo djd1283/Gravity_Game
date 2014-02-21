@@ -22,8 +22,8 @@ public class Sun extends GravitationalItem
 		c1[3] = 1;
 		radius = 5;
 		influenceOfGravity = 0;
-		strengthOfGravity = .1;
-		distanceFactorOfGravity = 1;
+		strengthOfGravity = 50;
+		distanceFactorOfGravity = 2;
 	}
 
 	@Override
